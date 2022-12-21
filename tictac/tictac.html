@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" type="text/css" href="style.css">
+
+   <title>TicTac</title>
+</head>
+<body>
+<div class="header">
+    <h1>Tic Tac Toe</h1>
+</div>
+<div class="box">
+    <div class="row">
+        <input class="btn" type="text" readonly>
+        <input class="btn" type="text" readonly>
+
+        <input class="btn" type="text" readonly>
+
+    </div>
+    <div class="row">
+        <input class="btn" type="text" readonly>
+        <input class="btn" type="text" readonly>
+
+        <input class="btn" type="text" readonly>
+
+    </div>
+    <div class="row">
+        <input class="btn" type="text" readonly>
+        <input class="btn" type="text" readonly>
+
+        <input class="btn" type="text" readonly>
+    </div>
+</div>
+<p class="result">Player X turn</p>
+<div class="reset">
+    <button id="reset">Reset</button>
+</div>
+<script>
+    let cells=['','','','','','','','',''];
+let currentPlayer='X';
+let result=document.querySelector('.result');
+console.log(result)
+ let btn=document.querySelectorAll('.btn');
+  console.log(btn)
+let condition=[
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
+];
+const ticTacToe=(element,index)=>{
+    element.value=currentPlayer;
+    element.disabled=true;
+    cells[index]=currentPlayer;
+    console.log(currentPlayer);
+    currentPlayer=currentPlayer=='X'?'O':'X';
+    result.innerHTML=`player ${currentPlayer} Turn`;
+    for(let i=0;i<condition.length;i++)
+    {
+        let condition=condition[i];
+        let a = cells[condition[0]];
+        let b= cells[condition[1]];
+        let c= cells[condition[2]];
+        console.log(a);
+        console.log(b)
+        console.log(c);
+    
+    if(a==''|| b==''||c=='')
+    {
+        continue;
+    }
+    if((a==b)&&(b==c))
+    {
+        result.innerHTML=`player ${a} won`;
+        btns.forEach((btn) => btn.disabled=true);
+    }
+}
+};
+function reset(){
+ cells=['','','','','','','','',''];
+ btn.forEach((btn)=>{
+    btn.value='';
+ });
+ currentPlayer='X';
+ reset.innerHTML='player X turn';
+ btn.forEach((btn)=>btn.disabled=false);
+};
+document.querySelector('#reset').addEventListener('click',reset);
+btn.forEach((btn,i)=>{
+    btn.addEventListener('click',()=>ticTacToe(btn,i))
+});
+</script>
+</body>
+</html>
